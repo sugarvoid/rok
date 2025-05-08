@@ -1,0 +1,448 @@
+picotron cartridge // www.picotron.net
+version 2
+
+:: gfx/
+:: gfx/0.gfx
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAxLTE3IDEwOjM1OjQ4Iixtb2RpZmllZD0iMjAyNS0w
+NS0wOCAxNDowMzoyNyIscmV2aXNpb249NDM3XV1sejQAigEAAAwyAADzIXtbMF09e2JtcD1weHUA
+QyAQEATwVgcQB8AX0BfABxAH8FYsZmxhZ3M9MCxwYW5feAgAx3k9MCx6b29tPTh9LD4A8AAICASg
+GUAJFQkQJQcVCQAFAH8gCRUJQBmgRgALLDEzRwDwBAAMUCwZMDwJIAkcAQwJEAkMARwMAA9LACFA
+IBVQFZQAnyAJBRcFCRAJNZQAJYJQDDAZLBAJPI4AERCaAA_UACQCJgFgIAkVByUABQA-EAkVRwAl
+GxwkAX88MBksUAwAkgAlMTUJECgBASQBTxVQFSCUACUGJAGfEDwJECwZMAxQSwAaAIoCH-B9AgwP
+MQD-Ia8ICATwCxdQF-ALZwAeDzEA---------2YArQfvCQwADFAMABwAHEAM8AE_AB2-BwxQLBA8
+ADxQDMA7AB3-AgIMMBwQDAAcEAwQDGAMcAyQQQAcz8AMUDwAPBAsUAzwB1cBHg8xAP----------
+--------------------------------------_BUG09OH19
+:: gfx/.info.pod
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAxLTE3IDEwOjM3OjQ1Iixtb2RpZmllZD0iMjAyNS0w
+NS0wOCAxNDowMzoyNyJdXQ==
+:: map/
+:: map/0.map
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAxLTE3IDEwOjM1OjQ4Iixtb2RpZmllZD0iMjAyNS0w
+NS0wOCAxNDowMzoyNyIscmV2aXNpb249NDE3XV1sejQAaAAAAFgQAADwCHt7Ym1wPXVzZXJkYXRh
+KCJpMTYiLDMyAwAvIjABAP--------------------vxCCIpLGhpZGRlbj1mYWxzZSxwYW5feD0w
+CADSeT0wLHRpbGVfaD0xNgoAEHcKAIB6b29tPTF9fQ==
+:: map/.info.pod
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAxLTE3IDEwOjM3OjQ1Iixtb2RpZmllZD0iMjAyNS0w
+NS0wOCAxNDowMzoyNyJdXQ==
+:: sfx/
+:: sfx/0.sfx
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAxLTE3IDEwOjM1OjQ5Iixtb2RpZmllZD0iMjAyNS0w
+NS0wOCAxNDowMzoyNyIscmV2aXNpb249NDE3XV1sejQAoAAAAAsKAAD-MHB4dQADKAAABAAED0AQ
+Ag4AAaABIAKgDgAPEAAN8MoBAgNADw_QBAUGB0AMkAgJCgtADJAPDA8NDw4MQAzw-wEA6-8nqgEQ
+Bg8gEAEgASAB8AACEAIOEAEgDyEgATAPQPDDDygP--DGD-gKD-8PgA-3Dw0B8AkBEAYOMAD-----
+-70f-wEArM-ID0AADxBA--_w8P8BAP-qUP----8p
+:: sfx/.info.pod
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAxLTE3IDEwOjM3OjQ1Iixtb2RpZmllZD0iMjAyNS0w
+NS0wOCAxNDowMzoyNyJdXQ==
+:: bullet.lua
+--[[pod_format="raw",created="2025-05-08 12:42:25",modified="2025-05-08 14:03:27",revision=289]]
+
+
+bullets = {}
+
+Bullet=Object:extend()
+
+function Bullet:new(parent, dir)
+
+	if dir[1] == 0 and dir[2] == 0 then
+		return
+	end
+	
+    self.x=parent.pos.x
+    self.y=parent.pos.y
+    --self.hitbox = {x=x+3,y=y+2,w=2,h=3}
+    
+    self.img=16
+    self.w = 4
+    self.h = 4
+    self.col = 7
+    self.speed=2
+    self.dx = dir[1]
+    self.dy = dir[2]
+
+    self.hitbox = Hitbox(self,self.x,self.y+4,self.w, self.h,2,2 )
+    add(bullets, self)
+end
+
+function Bullet:update()
+	
+	self.dx, self.dy = normalize_vector(self.dx, self.dy)
+
+    self.x += self.dx * self.speed
+    self.y += self.dy * self.speed
+
+    --self.hitbox.x = self.x + 3
+    --self.hitbox.y = self.y + 2
+
+    -- if is_colliding(p1, self) then
+    --     offset =0.1
+    --     del(objects.front, self)
+    --     p1:take_samage()
+    -- end
+
+    if self.x <= -5 or self.x>= 130 or
+    self.y<= -5 or self.y>=130 then
+    --     --explode(self.x,self.y,3,4,5)
+    --     sfx(18)
+    	del(bullets,self)
+    end
+    self.hitbox:update()
+end
+
+function Bullet:draw()
+    spr(self.img,self.x,self.y)
+    self.hitbox:draw()
+    --draw_hitbox(self.hitbox)
+end
+
+:: ceiling.lua
+--[[pod_format="raw",created="2025-05-08 13:03:56",modified="2025-05-08 14:03:27",revision=230]]
+
+
+ceiling = {
+	tic=0,
+	x=2, 
+	y=2,
+	hitbox = Hitbox(nil,1,3,125,6)
+}
+
+local ceiling_segment = {
+	
+}
+
+for i = 1, 18 do
+	   ceiling_segment[i] = rnd({56,57,58})
+end
+
+function ceiling:draw()
+	for i = 0, 18 do
+		--print("ppo", 20, 20, 8)
+	   spr(ceiling_segment[i+1], 0 + (7 * i), 3)
+	end	
+	self.hitbox:draw()
+end
+
+function ceiling:update()
+	self.tic+=1
+	if self.tic >= 4 then
+		self.tic=0
+		for i = 1, 18 do
+			if ceiling_segment[i] < 59 then
+			    ceiling_segment[i] += 1
+			else 
+				ceiling_segment[i] = 56
+			end
+		end	
+	end
+end
+:: classic.lua
+--[[pod_format="raw",created="2025-05-08 12:32:22",modified="2025-05-08 14:03:27",revision=276]]
+--
+-- classic
+--
+-- Copyright (c) 2014, rxi
+--
+-- This module is free software; you can redistribute it and/or modify it under
+-- the terms of the MIT license. See LICENSE for details.
+--
+
+
+Object = {}
+Object.__index = Object
+
+
+function Object:new()
+end
+
+
+function Object:extend()
+  local cls = {}
+  for k, v in pairs(self) do
+    if k:find("__") == 1 then
+      cls[k] = v
+    end
+  end
+  cls.__index = cls
+  cls.super = self
+  setmetatable(cls, self)
+  return cls
+end
+
+
+function Object:implement(...)
+  for _, cls in pairs({...}) do
+    for k, v in pairs(cls) do
+      if self[k] == nil and type(v) == "function" then
+        self[k] = v
+      end
+    end
+  end
+end
+
+
+function Object:is(T)
+  local mt = getmetatable(self)
+  while mt do
+    if mt == T then
+      return true
+    end
+    mt = getmetatable(mt)
+  end
+  return false
+end
+
+
+function Object:__tostring()
+  return "Object"
+end
+
+
+function Object:__call(...)
+  local obj = setmetatable({}, self)
+  obj:new(...)
+  return obj
+end
+:: hitbox.lua
+--[[pod_format="raw",created="2025-05-08 13:53:26",modified="2025-05-08 14:03:27",revision=65]]
+Hitbox = Object:extend()
+
+function Hitbox:new(owner, x, y, w, h, ox, oy)
+    self.x = x
+    self.y = y
+    self.w = w
+    self.h = h
+    self.__ox = ox or 0
+    self.__oy = oy or 0
+    self.__owner = owner
+end
+
+function Hitbox:update()
+    if self.__owner then
+        self.x = self.__owner.x + self.__ox
+        self.y = self.__owner.y + self.__oy
+    end
+end
+
+function Hitbox:draw()
+    rect(self.x, self.y, self.x + self.w, self.y + self.h, 8)
+end
+:: main.lua
+--[[pod_format="raw",created="2025-01-17 10:35:48",modified="2025-05-08 14:03:27",revision=519]]
+
+include("classic.lua")
+
+include("hitbox.lua")
+
+include("bullet.lua")
+include("ceiling.lua")
+
+BTN = {
+	up = 2,
+	down = 3,
+	left = 1,
+	right = 0,
+	
+	o=4,
+	x=5
+}
+
+local canvas = userdata("u8", 128, 128)
+
+
+include("player.lua")
+
+function _init()
+	grav=0.02
+	vid(3)
+end
+
+function _update()
+	foreach(bullets, function(obj) obj:update() end )
+	player:update()
+	ceiling:update()
+end
+
+function _draw()
+	cls()
+	cls(0)
+	set_draw_target(canvas)
+		cls(0)
+		
+		foreach(bullets, function(obj) obj:draw() end )
+		--print(player.acceleration.x, 0, 0, 7)
+		--print(player.acceleration.y, 0, 8, 7)
+		player:draw()
+		ceiling:draw()
+		rect(0,0,127,127, 7)
+	set_draw_target()
+	draw_debug(0,0)
+	
+	spr(canvas, 56, 3) 
+end
+
+function v_mag( vx, vy )
+  return sqrt( ( vx * vx ) + ( vy * vy ) )
+end
+
+function v_normalize( vx, vy )
+  local len = v_mag( vx,vy )
+  return vx / len, vy / len
+end
+
+
+function normalize_vector(dx, dy)
+    local length = math.sqrt(dx * dx + dy * dy)
+    if length > 0 then
+        return dx / length, dy / length
+    else
+        return 0, 0
+    end
+end
+:: player.lua
+--[[pod_format="raw",created="2025-05-07 15:49:24",modified="2025-05-08 14:03:27",revision=550]]
+
+local gravity = 0.5 --0 * 1.5
+local move_speed = 1 --5 -- 0 * 1.5
+--local leftRightSpeed = 80--0
+local xDrag = 30--0
+local maxVelY = 6--0
+
+
+player = {
+	img=7,
+	x=30,
+	y=30,
+	y_force=1.5,
+	x_force=0.20,
+	dx=0,
+	dy=0,
+	pos = { x = x or 0, y = y or 0 },
+	offset = { x = 0, y = 0},
+	velocity = { x = 0, y = 0 },
+	acceleration = { x = 0, y = 0 },
+	drag = { x = xDrag, y = -gravity }, -- 80 = gravity
+	maxVelocity = { x = 80, y = maxVelY },
+	speed = { x = 0, y = 0 }, -- used to assign to acceleration
+	shoot_delay = 0.2,
+	canAtk = true,
+	shoot = false,
+	shootAngle = 0,
+}
+
+function player:draw()
+	spr(self.img, self.pos.x, self.pos.y)
+end 
+
+function player:update()
+	self.shoot_delay-=1
+	 self.pos.y+=gravity --apply gravity
+		if (btn(BTN.up)) then 
+			--self.dx-=self.x_force 
+			self.acceleration.y = move_speed
+			self:shoot("up")
+		elseif (btn(BTN.down)) then 
+			--self.dx+=self.x_force 
+			self:shoot("down")
+			self.acceleration.y = -move_speed
+		else
+		self.acceleration.y = 0
+		end
+
+		if btn(BTN.right) then
+		gravity = 0.2
+		self:shoot("right")
+			-- up
+			--self.dy = 1
+			--spawn_seed(self.x, self.y)
+			--self.dy-=self.y_force
+			self.acceleration.x = move_speed--/1.5
+			
+		elseif btn(BTN.left)  then
+			--sfx(0)
+			gravity = 0.2
+			self:shoot("left")
+			self.acceleration.x = -move_speed--/1.5
+			--notify("pull")
+			--spawn_drop(self.x, self.y, mode_col[p1.mode])
+			--self.dy+=(self.y_force)
+		else
+		gravity = 0.5
+			self.acceleration.x = 0
+		end
+
+    self.maxVelocity.y = maxVelY
+		
+		self.acceleration.x, self.acceleration.y = normalize_vector(self.acceleration.x, self.acceleration.y)
+		
+--		self.x+=self.dx --move player
+--		self.x = clamp(self.x,0,120)
+		--self.dx = clamp(self.dx,-2,1)
+		--self.dy = clamp(self.dy,-2, 1)
+		self.pos.y+=self.acceleration.y
+		self.pos.x+=self.acceleration.x
+		--self:update_mode()
+end 
+
+function player:shoot(dir)
+	if self.shoot_delay <= 0 then
+		Bullet(self, {-self.acceleration.x,-self.acceleration.y})
+		if dir == "up" then
+			--Bullet(self, {0,-1})
+			self.img=3
+	 	elseif dir == "down" then
+	 		--Bullet(self, {0,1})
+	 		self.img=7
+	 	elseif dir == "left" then
+	 		--Bullet(self, {1,0})
+	 		self.img=5
+	 	elseif dir == "right" then
+	 		--Bullet(self, {-1,0})
+	 		self.img=1
+		end
+		self.shoot_delay = 6
+	end
+end
+
+function clamp(n,a,b)
+	if n < a then
+		n = a
+ elseif n > b then
+		n = b
+	end
+ 	return n
+end
+
+
+
+function draw_debug(x, y)
+
+	--Debugs Table
+	local debugs = {
+	    "\#3" .. "fps: " .. stat(7),
+	    "\#3" .. "cpu: " .. flr(stat(1) * 100) .. "%",
+	    "\#3" .. "ram: " .. flr(stat(0) / 1048576 * 100) / 100 .. "mb",
+	    ----------------
+	    --"\#1" .. "table: "    .. #table,
+	    "\#1" .. "player.dy: "    .. player.acceleration.x,
+	    "\#1" .. "player.dy: "    .. player.acceleration.y,
+	}
+
+	--Print Debugs
+	for i = 0,#debugs do
+	    local txt = debugs[i+1] or ""
+	    local pad = string.rep(" ", max(0, 15 - #txt))
+	    print("\014" .. txt .. pad, x, y + (7 * i), 7)
+	end
+
+end
+:: .info.pod
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAxLTE3IDEwOjM3OjQ1Iixtb2RpZmllZD0iMjAyNS0w
+NS0wOCAxNDowMzoyNyIscnVudGltZT0xNyx3b3Jrc3BhY2VzPXt7bG9jYXRpb249Im1haW4ubHVh
+IzIiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249InBsYXllci5sdWEjNzAiLHdvcmtzcGFj
+ZV9pbmRleD0xfSx7bG9jYXRpb249ImNsYXNzaWMubHVhIzEiLHdvcmtzcGFjZV9pbmRleD0xfSx7
+bG9jYXRpb249ImJ1bGxldC5sdWEjMjUiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249ImNl
+aWxpbmcubHVhIzciLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249ImhpdGJveC5sdWEjMSIs
+d29ya3NwYWNlX2luZGV4PTF9LHtsb2NhdGlvbj0iZ2Z4LzAuZ2Z4Iix3b3Jrc3BhY2VfaW5kZXg9
+Mn0se2xvY2F0aW9uPSJtYXAvMC5tYXAiLHdvcmtzcGFjZV9pbmRleD0zfSx7bG9jYXRpb249InNm
+eC8wLnNmeCIsd29ya3NwYWNlX2luZGV4PTR9fV1d
+:: [eoc]
