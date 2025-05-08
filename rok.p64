@@ -4,7 +4,7 @@ version 2
 :: gfx/
 :: gfx/0.gfx
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAxLTE3IDEwOjM1OjQ4Iixtb2RpZmllZD0iMjAyNS0w
-NS0wOCAxNDowMzoyNyIscmV2aXNpb249NDM3XV1sejQAigEAAAwyAADzIXtbMF09e2JtcD1weHUA
+NS0wOCAxNDoxMDo1OCIscmV2aXNpb249NDU0XV1sejQAigEAAAwyAADzIXtbMF09e2JtcD1weHUA
 QyAQEATwVgcQB8AX0BfABxAH8FYsZmxhZ3M9MCxwYW5feAgAx3k9MCx6b29tPTh9LD4A8AAICASg
 GUAJFQkQJQcVCQAFAH8gCRUJQBmgRgALLDEzRwDwBAAMUCwZMDwJIAkcAQwJEAkMARwMAA9LACFA
 IBVQFZQAnyAJBRcFCRAJNZQAJYJQDDAZLBAJPI4AERCaAA_UACQCJgFgIAkVByUABQA-EAkVRwAl
@@ -14,28 +14,28 @@ ADxQDMA7AB3-AgIMMBwQDAAcEAwQDGAMcAyQQQAcz8AMUDwAPBAsUAzwB1cBHg8xAP----------
 --------------------------------------_BUG09OH19
 :: gfx/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAxLTE3IDEwOjM3OjQ1Iixtb2RpZmllZD0iMjAyNS0w
-NS0wOCAxNDowMzoyNyJdXQ==
+NS0wOCAxNDoxMDo1OCJdXQ==
 :: map/
 :: map/0.map
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAxLTE3IDEwOjM1OjQ4Iixtb2RpZmllZD0iMjAyNS0w
-NS0wOCAxNDowMzoyNyIscmV2aXNpb249NDE3XV1sejQAaAAAAFgQAADwCHt7Ym1wPXVzZXJkYXRh
+NS0wOCAxNDoxMDo1OCIscmV2aXNpb249NDMzXV1sejQAaAAAAFgQAADwCHt7Ym1wPXVzZXJkYXRh
 KCJpMTYiLDMyAwAvIjABAP--------------------vxCCIpLGhpZGRlbj1mYWxzZSxwYW5feD0w
 CADSeT0wLHRpbGVfaD0xNgoAEHcKAIB6b29tPTF9fQ==
 :: map/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAxLTE3IDEwOjM3OjQ1Iixtb2RpZmllZD0iMjAyNS0w
-NS0wOCAxNDowMzoyNyJdXQ==
+NS0wOCAxNDoxMDo1OCJdXQ==
 :: sfx/
 :: sfx/0.sfx
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAxLTE3IDEwOjM1OjQ5Iixtb2RpZmllZD0iMjAyNS0w
-NS0wOCAxNDowMzoyNyIscmV2aXNpb249NDE3XV1sejQAoAAAAAsKAAD-MHB4dQADKAAABAAED0AQ
+NS0wOCAxNDoxMDo1OCIscmV2aXNpb249NDMzXV1sejQAoAAAAAsKAAD-MHB4dQADKAAABAAED0AQ
 Ag4AAaABIAKgDgAPEAAN8MoBAgNADw_QBAUGB0AMkAgJCgtADJAPDA8NDw4MQAzw-wEA6-8nqgEQ
 Bg8gEAEgASAB8AACEAIOEAEgDyEgATAPQPDDDygP--DGD-gKD-8PgA-3Dw0B8AkBEAYOMAD-----
 -70f-wEArM-ID0AADxBA--_w8P8BAP-qUP----8p
 :: sfx/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAxLTE3IDEwOjM3OjQ1Iixtb2RpZmllZD0iMjAyNS0w
-NS0wOCAxNDowMzoyNyJdXQ==
+NS0wOCAxNDoxMDo1OCJdXQ==
 :: bullet.lua
---[[pod_format="raw",created="2025-05-08 12:42:25",modified="2025-05-08 14:03:27",revision=289]]
+--[[pod_format="raw",created="2025-05-08 12:42:25",modified="2025-05-08 14:10:58",revision=305]]
 
 
 bullets = {}
@@ -96,7 +96,7 @@ function Bullet:draw()
 end
 
 :: ceiling.lua
---[[pod_format="raw",created="2025-05-08 13:03:56",modified="2025-05-08 14:03:27",revision=230]]
+--[[pod_format="raw",created="2025-05-08 13:03:56",modified="2025-05-08 14:10:58",revision=247]]
 
 
 ceiling = {
@@ -136,7 +136,7 @@ function ceiling:update()
 	end
 end
 :: classic.lua
---[[pod_format="raw",created="2025-05-08 12:32:22",modified="2025-05-08 14:03:27",revision=276]]
+--[[pod_format="raw",created="2025-05-08 12:32:22",modified="2025-05-08 14:07:59",revision=284]]
 --
 -- classic
 --
@@ -203,7 +203,7 @@ function Object:__call(...)
   return obj
 end
 :: hitbox.lua
---[[pod_format="raw",created="2025-05-08 13:53:26",modified="2025-05-08 14:03:27",revision=65]]
+--[[pod_format="raw",created="2025-05-08 13:53:26",modified="2025-05-08 14:07:59",revision=73]]
 Hitbox = Object:extend()
 
 function Hitbox:new(owner, x, y, w, h, ox, oy)
@@ -227,7 +227,7 @@ function Hitbox:draw()
     rect(self.x, self.y, self.x + self.w, self.y + self.h, 8)
 end
 :: main.lua
---[[pod_format="raw",created="2025-01-17 10:35:48",modified="2025-05-08 14:03:27",revision=519]]
+--[[pod_format="raw",created="2025-01-17 10:35:48",modified="2025-05-08 14:10:58",revision=537]]
 
 include("classic.lua")
 
@@ -275,7 +275,7 @@ function _draw()
 		ceiling:draw()
 		rect(0,0,127,127, 7)
 	set_draw_target()
-	draw_debug(0,0)
+	--draw_debug(0,0)
 	
 	spr(canvas, 56, 3) 
 end
@@ -299,13 +299,13 @@ function normalize_vector(dx, dy)
     end
 end
 :: player.lua
---[[pod_format="raw",created="2025-05-07 15:49:24",modified="2025-05-08 14:03:27",revision=550]]
+--[[pod_format="raw",created="2025-05-07 15:49:24",modified="2025-05-08 14:10:58",revision=570]]
 
 local gravity = 0.5 --0 * 1.5
 local move_speed = 1 --5 -- 0 * 1.5
 --local leftRightSpeed = 80--0
-local xDrag = 30--0
-local maxVelY = 6--0
+--local xDrag = 30--0
+--local maxVelY = 6--0
 
 
 player = {
@@ -317,16 +317,9 @@ player = {
 	dx=0,
 	dy=0,
 	pos = { x = x or 0, y = y or 0 },
-	offset = { x = 0, y = 0},
-	velocity = { x = 0, y = 0 },
-	acceleration = { x = 0, y = 0 },
-	drag = { x = xDrag, y = -gravity }, -- 80 = gravity
-	maxVelocity = { x = 80, y = maxVelY },
-	speed = { x = 0, y = 0 }, -- used to assign to acceleration
+	--acceleration = { x = 0, y = 0 },
 	shoot_delay = 0.2,
-	canAtk = true,
 	shoot = false,
-	shootAngle = 0,
 }
 
 function player:draw()
@@ -335,17 +328,17 @@ end
 
 function player:update()
 	self.shoot_delay-=1
-	 self.pos.y+=gravity --apply gravity
+	 self.pos.y+=gravity
 		if (btn(BTN.up)) then 
 			--self.dx-=self.x_force 
-			self.acceleration.y = move_speed
+			self.dy = move_speed
 			self:shoot("up")
 		elseif (btn(BTN.down)) then 
 			--self.dx+=self.x_force 
 			self:shoot("down")
-			self.acceleration.y = -move_speed
+			self.dy = -move_speed
 		else
-		self.acceleration.y = 0
+		self.dy = 0
 		end
 
 		if btn(BTN.right) then
@@ -355,37 +348,37 @@ function player:update()
 			--self.dy = 1
 			--spawn_seed(self.x, self.y)
 			--self.dy-=self.y_force
-			self.acceleration.x = move_speed--/1.5
+			self.dx = move_speed--/1.5
 			
 		elseif btn(BTN.left)  then
 			--sfx(0)
 			gravity = 0.2
 			self:shoot("left")
-			self.acceleration.x = -move_speed--/1.5
+			self.dx = -move_speed--/1.5
 			--notify("pull")
 			--spawn_drop(self.x, self.y, mode_col[p1.mode])
 			--self.dy+=(self.y_force)
 		else
 		gravity = 0.5
-			self.acceleration.x = 0
+			self.dx = 0
 		end
 
-    self.maxVelocity.y = maxVelY
+    --self.maxVelocity.y = maxVelY
 		
-		self.acceleration.x, self.acceleration.y = normalize_vector(self.acceleration.x, self.acceleration.y)
+		self.dx, self.dy = normalize_vector(self.dx, self.dy)
 		
 --		self.x+=self.dx --move player
 --		self.x = clamp(self.x,0,120)
 		--self.dx = clamp(self.dx,-2,1)
 		--self.dy = clamp(self.dy,-2, 1)
-		self.pos.y+=self.acceleration.y
-		self.pos.x+=self.acceleration.x
+		self.pos.y+=self.dy
+		self.pos.x+=self.dx
 		--self:update_mode()
 end 
 
 function player:shoot(dir)
 	if self.shoot_delay <= 0 then
-		Bullet(self, {-self.acceleration.x,-self.acceleration.y})
+		Bullet(self, {-self.dx,-self.dy})
 		if dir == "up" then
 			--Bullet(self, {0,-1})
 			self.img=3
@@ -423,8 +416,8 @@ function draw_debug(x, y)
 	    "\#3" .. "ram: " .. flr(stat(0) / 1048576 * 100) / 100 .. "mb",
 	    ----------------
 	    --"\#1" .. "table: "    .. #table,
-	    "\#1" .. "player.dy: "    .. player.acceleration.x,
-	    "\#1" .. "player.dy: "    .. player.acceleration.y,
+	    "\#1" .. "player.dy: "    .. player.dx,
+	    "\#1" .. "player.dy: "    .. player.dy,
 	}
 
 	--Print Debugs
@@ -437,12 +430,10 @@ function draw_debug(x, y)
 end
 :: .info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAxLTE3IDEwOjM3OjQ1Iixtb2RpZmllZD0iMjAyNS0w
-NS0wOCAxNDowMzoyNyIscnVudGltZT0xNyx3b3Jrc3BhY2VzPXt7bG9jYXRpb249Im1haW4ubHVh
-IzIiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249InBsYXllci5sdWEjNzAiLHdvcmtzcGFj
-ZV9pbmRleD0xfSx7bG9jYXRpb249ImNsYXNzaWMubHVhIzEiLHdvcmtzcGFjZV9pbmRleD0xfSx7
-bG9jYXRpb249ImJ1bGxldC5sdWEjMjUiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249ImNl
-aWxpbmcubHVhIzciLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249ImhpdGJveC5sdWEjMSIs
-d29ya3NwYWNlX2luZGV4PTF9LHtsb2NhdGlvbj0iZ2Z4LzAuZ2Z4Iix3b3Jrc3BhY2VfaW5kZXg9
-Mn0se2xvY2F0aW9uPSJtYXAvMC5tYXAiLHdvcmtzcGFjZV9pbmRleD0zfSx7bG9jYXRpb249InNm
-eC8wLnNmeCIsd29ya3NwYWNlX2luZGV4PTR9fV1d
+NS0wOCAxNDoxMDo1OCIscnVudGltZT0xNyx3b3Jrc3BhY2VzPXt7bG9jYXRpb249Im1haW4ubHVh
+IzQ4Iix3b3Jrc3BhY2VfaW5kZXg9MX0se2xvY2F0aW9uPSJwbGF5ZXIubHVhIzExOCIsd29ya3Nw
+YWNlX2luZGV4PTF9LHtsb2NhdGlvbj0iYnVsbGV0Lmx1YSMyNSIsd29ya3NwYWNlX2luZGV4PTF9
+LHtsb2NhdGlvbj0iY2VpbGluZy5sdWEjNyIsd29ya3NwYWNlX2luZGV4PTF9LHtsb2NhdGlvbj0i
+Z2Z4LzAuZ2Z4Iix3b3Jrc3BhY2VfaW5kZXg9Mn0se2xvY2F0aW9uPSJtYXAvMC5tYXAiLHdvcmtz
+cGFjZV9pbmRleD0zfSx7bG9jYXRpb249InNmeC8wLnNmeCIsd29ya3NwYWNlX2luZGV4PTR9fV1d
 :: [eoc]
