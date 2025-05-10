@@ -4,7 +4,7 @@ version 2
 :: gfx/
 :: gfx/0.gfx
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAxLTE3IDEwOjM1OjQ4Iixtb2RpZmllZD0iMjAyNS0w
-NS0wOCAxNDo1MzoyMyIscmV2aXNpb249NjE1XV1sejQA6AEAAHEyAADzIXtbMF09e2JtcD1weHUA
+NS0xMCAxNTowNjo1MSIscmV2aXNpb249NjgwXV1sejQA6AEAAHEyAADzIXtbMF09e2JtcD1weHUA
 QyAQEATwVgcQB8AX0BfABxAH8FYsZmxhZ3M9MCxwYW5feAgAx3k9MCx6b29tPTh9LD4A8AAICASg
 GUAJFQkQJQcVCQAFAH8gCRUJQBmgRgALLDEzRwBwAAVQJRkwNT8AbwcFCRAJBUsAJ0AgFVAVlABA
 IAkFF0sAHzVJACWCUAUwGSUQCTWOABEQmgAPSwAkAiYBAN0AICUABQAfEEcALQYkAX81MBklUAUA
@@ -16,31 +16,32 @@ DQwAHBAMAgAv8AY8AB2PCAxADDAM8AyUAR4PMQD-------------------------------------
 ------------UFBtPTh9fQ==
 :: gfx/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAxLTE3IDEwOjM3OjQ1Iixtb2RpZmllZD0iMjAyNS0w
-NS0wOCAxNDo1MzoyMyJdXQ==
+NS0xMCAxNTowNjo1MSJdXQ==
 :: map/
 :: map/0.map
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAxLTE3IDEwOjM1OjQ4Iixtb2RpZmllZD0iMjAyNS0w
-NS0wOCAxNDo1MzoyMyIscmV2aXNpb249NTgyXV1sejQAaAAAAFgQAADwCHt7Ym1wPXVzZXJkYXRh
+NS0xMCAxNTowNjo1MSIscmV2aXNpb249NjQ3XV1sejQAaAAAAFgQAADwCHt7Ym1wPXVzZXJkYXRh
 KCJpMTYiLDMyAwAvIjABAP--------------------vxCCIpLGhpZGRlbj1mYWxzZSxwYW5feD0w
 CADSeT0wLHRpbGVfaD0xNgoAEHcKAIB6b29tPTF9fQ==
 :: map/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAxLTE3IDEwOjM3OjQ1Iixtb2RpZmllZD0iMjAyNS0w
-NS0wOCAxNDo1MzoyMyJdXQ==
+NS0xMCAxNTowNjo1MSJdXQ==
 :: sfx/
 :: sfx/0.sfx
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAxLTE3IDEwOjM1OjQ5Iixtb2RpZmllZD0iMjAyNS0w
-NS0wOCAxNDo1MzoyMyIscmV2aXNpb249NTgyXV1sejQAoAAAAAsKAAD-MHB4dQADKAAABAAED0AQ
+NS0xMCAxNTowNjo1MSIscmV2aXNpb249NjQ3XV1sejQAoAAAAAsKAAD-MHB4dQADKAAABAAED0AQ
 Ag4AAaABIAKgDgAPEAAN8MoBAgNADw_QBAUGB0AMkAgJCgtADJAPDA8NDw4MQAzw-wEA6-8nqgEQ
 Bg8gEAEgASAB8AACEAIOEAEgDyEgATAPQPDDDygP--DGD-gKD-8PgA-3Dw0B8AkBEAYOMAD-----
 -70f-wEArM-ID0AADxBA--_w8P8BAP-qUP----8p
 :: sfx/.info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAxLTE3IDEwOjM3OjQ1Iixtb2RpZmllZD0iMjAyNS0w
-NS0wOCAxNDo1MzoyMyJdXQ==
+NS0xMCAxNTowNjo1MSJdXQ==
 :: bullet.lua
---[[pod_format="raw",created="2025-05-08 12:42:25",modified="2025-05-08 14:53:23",revision=467]]
+--[[pod_format="raw",created="2025-05-08 12:42:25",modified="2025-05-10 15:06:51",revision=543]]
 
 
-bullets = {}
+p_bullets = {}
+e_bullets = {}
 
 Bullet=Object:extend()
 
@@ -49,18 +50,23 @@ function Bullet:new(parent, dir)
 	if dir[1] == 0 and dir[2] == 0 then
 		return
 	end
-    self.x=parent.x
-    self.y=parent.y
-    self.img=16
-    self.w = 4
-    self.h = 4
-    self.col = 7
-    self.speed=2
-    self.dx = dir[1]
-    self.dy = dir[2]
-
-    self.hitbox = Hitbox(self,self.x,self.y+4,self.w, self.h,2,2 )
-    add(bullets, self)
+	self.x=parent.x
+	self.y=parent.y
+	self.img=16
+	self.w = 4
+	self.h = 4
+	self.col = 7
+	self.speed=2
+	self.dx = dir[1]
+	self.dy = dir[2]
+	
+	self.hitbox = Hitbox(self,self.x,self.y+4,self.w, self.h,2,2 )
+	
+	if parent:is(Player) then
+		add(p_bullets, self)
+	elseif parent:is(Enemy) then
+		add(e_bullets, self)
+	end
 end
 
 function Bullet:update()
@@ -69,7 +75,7 @@ function Bullet:update()
 	self.y += self.dy * self.speed
 	if self.x <= -5 or self.x>= 130 or
 		self.y<= -5 or self.y>=130 then
-			del(bullets,self)
+			del(p_bullets,self)
 	end
 	self.hitbox:update()
 end
@@ -183,10 +189,21 @@ function Object:__call(...)
   return obj
 end
 :: enemy.lua
---[[pod_format="raw",created="2025-05-08 14:50:13",modified="2025-05-08 14:53:23",revision=10]]
+--[[pod_format="raw",created="2025-05-08 14:50:13",modified="2025-05-10 15:06:51",revision=80]]
 Enemy = Object:extend()
 
-function Enemy:new(x,y)
+
+-- enemy subclass
+
+-- 1  above player. low health, mostly to be annoying 
+
+-- 2 come from sides.small. fast? can target player. 
+
+-- 3 stay at bottom. tanky. slow. only move left and right
+
+
+function Enemy:new(x,y, subclass)
+	self.sc = subclass
 	self.x = x
 	self.y = y
 	self.w = 0
@@ -200,6 +217,7 @@ function Enemy:update()
 end
 
 function Enemy:draw()
+	spr(self.img, self.x, self.y)
 end
 
 function Enemy:take_damage()
@@ -232,12 +250,15 @@ function Hitbox:draw()
     rect(self.x, self.y, self.x + self.w, self.y + self.h, 8)
 end
 :: main.lua
---[[pod_format="raw",created="2025-01-17 10:35:48",modified="2025-05-08 14:53:23",revision=697]]
+--[[pod_format="raw",created="2025-01-17 10:35:48",modified="2025-05-10 15:06:51",revision=775]]
 
 include("classic.lua")
 
 include("hitbox.lua")
 
+include("particle.lua")
+include("player.lua")
+include("enemy.lua")
 include("bullet.lua")
 include("ceiling.lua")
 
@@ -253,7 +274,7 @@ BTN = {
 local canvas = userdata("u8", 128, 128)
 
 
-include("player.lua")
+
 
 function _init()
 	grav=0.02
@@ -262,7 +283,8 @@ function _init()
 end
 
 function _update()
-	foreach(bullets, function(obj) obj:update() end )
+	foreach(p_bullets, function(obj) obj:update() end )
+	foreach(e_bullets, function(obj) obj:update() end )
 	player:update()
 	ceiling:update()
 end
@@ -272,16 +294,18 @@ function _draw()
 	cls(0)
 	set_draw_target(canvas)
 	cls(0)
-	foreach(bullets, function(obj) obj:draw() end )
+	foreach(p_bullets, function(obj) obj:draw() end )
+	foreach(e_bullets, function(obj) obj:draw() end )
 	player:draw()
 	ceiling:draw()
 	rect(0,0,127,127, 7)
 		
 	spr(32, 20, 110)
 	set_draw_target()
-	--draw_debug(0,0)
+	draw_debug(0,0)
 	
 	spr(canvas, 56, 3) 
+	print(#p_bullets, 0, 40, 8)
 end
 
 function v_mag( vx, vy )
@@ -338,8 +362,59 @@ function is_colliding(a,b)
 	    return true
 	end
 end
+:: particle.lua
+--[[pod_format="raw",created="2025-05-08 15:03:51",modified="2025-05-10 15:06:51",revision=44]]
+
+all_particles={}
+
+function update_particles()
+    for p in all(all_particles) do
+        p.timer+=1
+        if p.timer>p.life then del(all_particles,p) end
+
+        --physics
+        if p.grav then p.dy+=.5 end
+        if p.grow then p.r+=.1 end
+        if p.shrink then p.r-=.1 end
+
+        --move
+        p.x+=p.dx
+        p.y+=p.dy
+    end
+end
+
+function draw_particles()
+    for p in all(all_particles) do
+        if p.r<=1 then
+            pset(p.x,p.y,p.c)
+        else
+            circfill(p.x,p.y,p.r,p.c)
+        end
+    end
+end
+
+
+function explode(x,y,r,num,c,t)
+    for i=0, num do
+        local _p={
+            x=x,
+            y=y,
+            timer=0,
+            life=(t or 30)+rnd(10),
+            dx=rnd(2)-1,
+            dy=rnd(2)-1,
+            grav=false,
+            shrink=true,
+            grow=false,
+            r=r,
+            c=c,
+        }
+        add(all_particles,_p)
+    end
+end
+
 :: player.lua
---[[pod_format="raw",created="2025-05-07 15:49:24",modified="2025-05-08 14:53:23",revision=750]]
+--[[pod_format="raw",created="2025-05-07 15:49:24",modified="2025-05-10 15:06:51",revision=820]]
 
 Player=Object:extend()
 
@@ -397,6 +472,8 @@ function Player:update()
 		player:die()
 	end
 	
+	
+	
 end 
 
 function Player:shoot(dir)
@@ -426,10 +503,11 @@ end
 
 :: .info.pod
 b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI1LTAxLTE3IDEwOjM3OjQ1Iixtb2RpZmllZD0iMjAyNS0w
-NS0wOCAxNDo1MzoyMyIscnVudGltZT0xNyx3b3Jrc3BhY2VzPXt7bG9jYXRpb249Im1haW4ubHVh
-IzEiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249InBsYXllci5sdWEjMSIsd29ya3NwYWNl
-X2luZGV4PTF9LHtsb2NhdGlvbj0iYnVsbGV0Lmx1YSMxIix3b3Jrc3BhY2VfaW5kZXg9MX0se2xv
-Y2F0aW9uPSJlbmVteS5sdWEjMTAiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249ImdmeC8w
-LmdmeCIsd29ya3NwYWNlX2luZGV4PTJ9LHtsb2NhdGlvbj0ibWFwLzAubWFwIix3b3Jrc3BhY2Vf
-aW5kZXg9M30se2xvY2F0aW9uPSJzZngvMC5zZngiLHdvcmtzcGFjZV9pbmRleD00fX1dXQ==
+NS0xMCAxNTowNjo1MSIscnVudGltZT0xNyx3b3Jrc3BhY2VzPXt7bG9jYXRpb249Im1haW4ubHVh
+IzU1Iix3b3Jrc3BhY2VfaW5kZXg9MX0se2xvY2F0aW9uPSJwbGF5ZXIubHVhIzEiLHdvcmtzcGFj
+ZV9pbmRleD0xfSx7bG9jYXRpb249ImJ1bGxldC5sdWEjMzgiLHdvcmtzcGFjZV9pbmRleD0xfSx7
+bG9jYXRpb249ImVuZW15Lmx1YSMxIix3b3Jrc3BhY2VfaW5kZXg9MX0se2xvY2F0aW9uPSJwYXJ0
+aWNsZS5sdWEjMSIsd29ya3NwYWNlX2luZGV4PTF9LHtsb2NhdGlvbj0iZ2Z4LzAuZ2Z4Iix3b3Jr
+c3BhY2VfaW5kZXg9Mn0se2xvY2F0aW9uPSJtYXAvMC5tYXAiLHdvcmtzcGFjZV9pbmRleD0zfSx7
+bG9jYXRpb249InNmeC8wLnNmeCIsd29ya3NwYWNlX2luZGV4PTR9fV1d
 :: [eoc]
